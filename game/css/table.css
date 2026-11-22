@@ -168,7 +168,7 @@
 #screen-loss h1 { font-size: 64px; color: #9aa4b0; margin: 0; letter-spacing: 0.12em; }
 .end-stats { font-family: ui-monospace, monospace; font-size: 18px; color: #efe3c8; margin: 18px 0 8px; line-height: 1.8; }
 #loss-card { display: flex; flex-direction: column; align-items: center; margin: 10px 0 4px; }
-/* Twin pair: two Gloam 8s fanned 20px apart, one ribbon centred under them. */
+/* Twin pair: two 8s of different suits fanned 20px apart, one ribbon centred under them. */
 .twin-pair { display: flex; justify-content: center; gap: 20px; }
 .twin-pair .card { width: 110px; height: 154px; }
 .twin-pair .card:first-child { transform: rotate(-6deg); }

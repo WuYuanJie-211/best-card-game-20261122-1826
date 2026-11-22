@@ -25,7 +25,7 @@
     var best = document.getElementById('win-best');
     if (state.bestCombo === 'Twin +6') {
       best.innerHTML = '<div class="win-combo"><div class="win-best-label">Your best play:</div>' +
-        twinPairHtml() +
+        twinPairHtml('win') +
         '<span class="twin-ribbon">TWIN +6</span></div>';
     } else {
       best.textContent = 'Best combo: ' + (state.bestCombo || 'Bond +4');
@@ -34,18 +34,26 @@
     CW.winBurst();
   }
 
-  // Twin pair: Gloam 8 + Frost 8 — equal values, different suits, one card
-  // of each in the 36-card deck. Both end screens carry the same pair.
-  function twinPairHtml() {
+  // Twin pairs (Superbot v3 fix plan): two 8s of DIFFERENT suits on each
+  // end screen, a different pair per screen. Loss: Gloam 8 + Flame 8.
+  // Win: Bramble 8 + Frost 8. (The plan's "Tide 8" does not exist — Tide
+  // is a lane, not a suit; Frost 8 is the remaining 8, so all four 8s
+  // appear exactly once across the two screens.) The old Gloam 8 + Frost 8
+  // on both screens was already a legal Twin, not a Bond (comboOf returns
+  // 'twin' on equal values before suit is ever checked), but the plan
+  // wants distinct pairs per screen.
+  function twinPairHtml(which) {
+    var pair = which === 'win'
+      ? [CW.makeCard('bramble', 8, 'twin-a'), CW.makeCard('frost', 8, 'twin-b')]
+      : [CW.makeCard('gloam', 8, 'twin-a'), CW.makeCard('flame', 8, 'twin-b')];
     return '<div class="twin-pair">' +
-      CW.cardHtml(CW.makeCard('gloam', 8, 'twin-a'), {}) +
-      CW.cardHtml(CW.makeCard('frost', 8, 'twin-b'), {}) + '</div>';
+      CW.cardHtml(pair[0], {}) + CW.cardHtml(pair[1], {}) + '</div>';
   }
 
   function showLoss(state) {
     document.getElementById('loss-wick').textContent = 'Final Wick ' + state.wick.you + ' – ' + state.wick.ai;
     document.getElementById('loss-rounds').textContent = 'Rounds played: ' + Math.min(state.round, CW.MAX_ROUNDS);
-    document.getElementById('loss-card').innerHTML = twinPairHtml() +
+    document.getElementById('loss-card').innerHTML = twinPairHtml('loss') +
       '<span class="twin-ribbon">TWIN +6</span>' +
       '<p class="loss-caption">The Wickkeeper&rsquo;s winning play.</p>';
     setScreen('loss');
