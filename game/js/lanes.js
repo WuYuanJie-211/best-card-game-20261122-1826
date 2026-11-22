@@ -17,11 +17,12 @@
     return parts.join(' + ') + ' = ' + s.total;
   }
 
-  // A lane win deals 1 Wick, +1 if the lane is Kindled. The combo's bonus is
-  // already in the lane total; the chip names the lane win alone.
+  // A lane win deals 1 Wick, +1 if the winner held a combo, +1 if the lane
+  // is Kindled — the same rule as scoreRound's damage.
   function wickChipText(state, lane, you, ai) {
     if (you.total === ai.total) return 'UNCLAIMED';
-    return 'WINS ' + (1 + (state.kindled === lane ? 1 : 0)) + ' WICK';
+    var winner = you.total > ai.total ? you : ai;
+    return 'WINS ' + (1 + (winner.combo ? 1 : 0) + (state.kindled === lane ? 1 : 0)) + ' WICK';
   }
 
   function renderLanes(state) {

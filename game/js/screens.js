@@ -67,7 +67,7 @@
   // Cover (?shot=table): exactly two placements per side, the Ladder as the
   // story, the keeper's 8 in the Kiln it announced. Kiln: you 6♦ 7♦ (Ladder
   // +5 = 18) vs keeper 8♦. Hollow: keeper 5● wins 1 Wick. Tide unclaimed.
-  // Wick YOU 9, KEEPER 11. Heat 4, Surge ready. Deck 20.
+  // Wick YOU 10, KEEPER 11. Heat 4, Surge ready. Deck 20.
   function seedTableState() {
     var s = freshState();
     s.phase = 'table';
@@ -75,7 +75,7 @@
     s.kindled = 'kiln';
     s.temper = 'kiln';
     s.temperLine = CW.temperLine('kiln');
-    s.wick = { you: 9, ai: 11 };
+    s.wick = { you: 10, ai: 11 };
     s.heat = { you: 4, ai: 2 };
     s.deckCount = 20;
     s.lanes.kiln.you = [CW.makeCard('frost', 6, 's-k1'), CW.makeCard('frost', 7, 's-k2')];
