@@ -41,14 +41,13 @@
     el('wick-ai-num').textContent = state.wick.ai;
     el('heat-you-num').textContent = state.heat.you;
     el('heat-ai-num').textContent = state.heat.ai;
-    // One flame pip per Heat, up to eight shown.
+    // One flame pip per Heat held, and no empty slots: Heat has no cap,
+    // so a fixed track would wrongly imply one.
     var pips = '';
-    for (var p = 0; p < 8; p++) pips += '<span class="heat-pip' + (p < state.heat.you ? ' on' : '') + '">▲</span>';
+    for (var p = 0; p < state.heat.you; p++) pips += '<span class="heat-pip on">▲</span>';
     el('heat-pips-you').innerHTML = pips;
     var surgeReady = CW.canSurge(state, 'you');
     el('surge-chip-you').style.display = surgeReady ? '' : 'none';
-    el('foot-surge-wrap').style.display = surgeReady ? '' : 'none';
-    el('foot-heat-num').textContent = state.heat.you;
     var deckCount = (state.deckCount != null) ? state.deckCount : state.deck.length;
     el('deck-count').textContent = deckCount;
     el('round-label').textContent = 'Round ' + Math.min(state.round, CW.MAX_ROUNDS) + ' / ' + CW.MAX_ROUNDS;

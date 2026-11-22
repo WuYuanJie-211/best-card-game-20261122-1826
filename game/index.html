@@ -20,13 +20,13 @@
         <div class="card suit-frost"><span class="card-value">5</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><polygon points="12,1 23,12 12,23 1,12" fill="#4fa8d8"/></svg></span><span class="card-name">Frost</span></div>
         <div class="card suit-bramble"><span class="card-value">3</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><g fill="#6fa844"><circle cx="12" cy="7" r="4.5"/><circle cx="6.5" cy="14.5" r="4.5"/><circle cx="17.5" cy="14.5" r="4.5"/><polygon points="10.5,16 13.5,16 15.5,22 8.5,22"/></g></svg></span><span class="card-name">Bramble</span></div>
         <div class="card suit-gloam"><span class="card-value">8</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#8f6bd6"/></svg></span><span class="card-name">Gloam</span></div>
-        <div class="card suit-ember"><span class="card-value">0</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><polygon points="12,1 14.6,8.2 22,8.6 16.4,13.4 18.4,20.8 12,16.8 5.6,20.8 7.6,13.4 2,8.6 9.4,8.2" fill="#e8d9a8"/></svg></span><span class="card-name">Ember Wild</span></div>
+        <div class="card suit-ember"><span class="card-value">0</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><polygon points="12,1 14.6,8.2 22,8.6 16.4,13.4 18.4,20.8 12,16.8 5.6,20.8 7.6,13.4 2,8.6 9.4,8.2" fill="#c9a94a"/></svg></span><span class="card-name">Ember Wild</span></div>
       </div>
       <h1 class="wordmark">CINDERWICK</h1>
       <p class="subtitle">A duel of three lanes</p>
       <button class="big-btn" id="btn-deal">Deal a Duel</button>
       <p class="rules-line">Three lanes. Five cards. Two you can play.</p>
-      <p class="title-foot">BOND +4 &nbsp;·&nbsp; LADDER +5 &nbsp;·&nbsp; TWIN +6 &nbsp;·&nbsp; WILD 0 · COPIES SUIT &nbsp;·&nbsp; BURN FOR HEAT &nbsp;·&nbsp; SURGE FOR ONE MORE PLAY</p>
+      <p class="title-foot">BOND +4 &nbsp;·&nbsp; LADDER +5 &nbsp;·&nbsp; TWIN +6 &nbsp;·&nbsp; WILD 0 · COPIES SUIT &nbsp;·&nbsp; BURN FOR HEAT &nbsp;·&nbsp; SURGE FOR ONE MORE PLAY &nbsp;·&nbsp; BEST COMBO PER LANE</p>
       <p class="title-bottom">36 cards · 3 lanes · 8 rounds · one Kindled lane a round</p>
     </section>
 
@@ -53,19 +53,19 @@
       </div>
       <div class="lanes">
         <div class="lane" id="lane-kiln">
-          <div class="lane-head"><span class="lane-name">The Kiln</span><span class="lane-kindled-badge">◆ KINDLED · WINS 3 WICK</span></div>
+          <div class="lane-head"><span class="lane-name">The Kiln</span><span class="lane-kindled-badge">KINDLED · ×2 DAMAGE</span></div>
           <div class="lane-row"><span class="lane-row-label">KEEPER</span><div class="lane-ai-cards"></div><div class="lane-score"><span class="lane-total lane-total-ai">–</span><span class="lane-maths lane-maths-ai">—</span><span class="lane-chip lane-chip-ai"></span></div></div>
           <div class="lane-row"><span class="lane-row-label">YOU</span><div class="lane-you-cards"></div><div class="lane-score"><span class="lane-total lane-total-you">–</span><span class="lane-maths lane-maths-you">—</span><span class="lane-chip lane-chip-you"></span></div></div>
           <span class="lane-combo"></span>
         </div>
         <div class="lane" id="lane-hollow">
-          <div class="lane-head"><span class="lane-name">The Hollow</span><span class="lane-kindled-badge">◆ KINDLED · WINS 3 WICK</span></div>
+          <div class="lane-head"><span class="lane-name">The Hollow</span><span class="lane-kindled-badge">KINDLED · ×2 DAMAGE</span></div>
           <div class="lane-row"><span class="lane-row-label">KEEPER</span><div class="lane-ai-cards"></div><div class="lane-score"><span class="lane-total lane-total-ai">–</span><span class="lane-maths lane-maths-ai">—</span><span class="lane-chip lane-chip-ai"></span></div></div>
           <div class="lane-row"><span class="lane-row-label">YOU</span><div class="lane-you-cards"></div><div class="lane-score"><span class="lane-total lane-total-you">–</span><span class="lane-maths lane-maths-you">—</span><span class="lane-chip lane-chip-you"></span></div></div>
           <span class="lane-combo"></span>
         </div>
         <div class="lane" id="lane-tide">
-          <div class="lane-head"><span class="lane-name">The Tide</span><span class="lane-kindled-badge">◆ KINDLED · WINS 3 WICK</span></div>
+          <div class="lane-head"><span class="lane-name">The Tide</span><span class="lane-kindled-badge">KINDLED · ×2 DAMAGE</span></div>
           <div class="lane-row"><span class="lane-row-label">KEEPER</span><div class="lane-ai-cards"></div><div class="lane-score"><span class="lane-total lane-total-ai">–</span><span class="lane-maths lane-maths-ai">—</span><span class="lane-chip lane-chip-ai"></span></div></div>
           <div class="lane-row"><span class="lane-row-label">YOU</span><div class="lane-you-cards"></div><div class="lane-score"><span class="lane-total lane-total-you">–</span><span class="lane-maths lane-maths-you">—</span><span class="lane-chip lane-chip-you"></span></div></div>
           <span class="lane-combo"></span>
@@ -73,12 +73,11 @@
       </div>
       <div id="player-hand"></div>
       <div id="ember-rule">Ember Wild copies the suit of the other card in its lane and adds 0.</div>
-      <div class="table-foot">Click a card, then click a lane to play it. Each round you place two cards — the third lane is the one you concede.
+      <div class="table-foot">Click a card, then click a lane to play it.<br>Each round you place two cards — the third lane is the one you concede.
         <button id="btn-resolve" style="display:none">Reveal</button>
       </div>
       <div class="table-footer">
-        <div class="foot-left">HEAT <b id="foot-heat-num">0</b><span id="foot-surge-wrap" style="display:none"> · <span class="surge-chip">SURGE READY</span></span></div>
-        <div class="foot-mid">DECK <span id="deck-count">36</span></div>
+        <div class="foot-left">DECK <span id="deck-count">36</span></div>
         <div class="foot-right">
           <button id="btn-burn" disabled>Burn: select a card first</button>
           <button id="btn-surge" disabled>Surge +1 placement (4 Heat)</button>
@@ -109,6 +108,7 @@
           <li><b>Bond +4</b> — two cards of the same suit in one lane.</li>
           <li><b>Ladder +5</b> — two consecutive values, either order.</li>
           <li><b>Twin +6</b> — two equal values. Highest combo only, never stacked.</li>
+          <li><b>Best combo only</b> — a lane counts only its best combo: Ladder beats Bond.</li>
           <li><b>Ember Wild</b> — copies the other card's suit for a Bond, adds 0, never a Ladder or Twin.</li>
           <li><b>Burn</b> — once a round, discard a card to bank Heat equal to its value.</li>
           <li><b>Surge</b> — spend 4 Heat for one extra placement this round.</li>

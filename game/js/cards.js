@@ -9,7 +9,7 @@
     frost:   { name: 'Frost',   color: '#4fa8d8', shape: 'diamond',  glyph: '◆' },
     bramble: { name: 'Bramble', color: '#6fa844', shape: 'club',     glyph: '♣' },
     gloam:   { name: 'Gloam',   color: '#8f6bd6', shape: 'circle',   glyph: '●' },
-    ember:   { name: 'Ember Wild', color: '#e8d9a8', shape: 'star',  glyph: '✶' }
+    ember:   { name: 'Ember Wild', color: '#c9a94a', shape: 'star',  glyph: '✶' }
   };
 
   // Inline SVG for a suit shape, drawn from paths (no text, no network).

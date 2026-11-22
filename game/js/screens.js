@@ -20,11 +20,13 @@
   function showWin(state) {
     document.getElementById('win-wick').textContent = 'Final Wick ' + state.wick.you + ' – ' + state.wick.ai;
     document.getElementById('win-rounds').textContent = 'Rounds played: ' + Math.min(state.round, CW.MAX_ROUNDS);
-    // The winning Twin, shown as the same pair as on the loss screen.
+    // The winning Twin: two 8s of DIFFERENT suits (equal values, not equal
+    // cards), labelled and full-size.
     var best = document.getElementById('win-best');
     if (state.bestCombo === 'Twin +6') {
-      best.innerHTML = '<span class="twin-mini">' + twinPairHtml() +
-        '<span class="twin-ribbon">TWIN +6</span></span>';
+      best.innerHTML = '<div class="win-combo"><div class="win-best-label">Your best play:</div>' +
+        twinPairHtml() +
+        '<span class="twin-ribbon">TWIN +6</span></div>';
     } else {
       best.textContent = 'Best combo: ' + (state.bestCombo || 'Bond +4');
     }
@@ -32,11 +34,12 @@
     CW.winBurst();
   }
 
-  // Two Gloam 8s, the Twin pair both end screens carry.
+  // Twin pair: Gloam 8 + Frost 8 — equal values, different suits, one card
+  // of each in the 36-card deck. Both end screens carry the same pair.
   function twinPairHtml() {
     return '<div class="twin-pair">' +
       CW.cardHtml(CW.makeCard('gloam', 8, 'twin-a'), {}) +
-      CW.cardHtml(CW.makeCard('gloam', 8, 'twin-b'), {}) + '</div>';
+      CW.cardHtml(CW.makeCard('frost', 8, 'twin-b'), {}) + '</div>';
   }
 
   function showLoss(state) {
@@ -67,7 +70,9 @@
   // Cover (?shot=table): exactly two placements per side, the Ladder as the
   // story, the keeper's 8 in the Kiln it announced. Kiln: you 6♦ 7♦ (Ladder
   // +5 = 18) vs keeper 8♦. Hollow: keeper 5● wins 1 Wick. Tide unclaimed.
-  // Wick YOU 10, KEEPER 11. Heat 4, Surge ready. Deck 20.
+  // Wick YOU 10, KEEPER 11. Heat 4, Surge ready. Deck 14 (36 − 10 in hands
+  // − 4 on the table − 8 played in rounds 1–2). Hand holds no card that is
+  // already on the table.
   function seedTableState() {
     var s = freshState();
     s.phase = 'table';
@@ -77,7 +82,7 @@
     s.temperLine = CW.temperLine('kiln');
     s.wick = { you: 10, ai: 11 };
     s.heat = { you: 4, ai: 2 };
-    s.deckCount = 20;
+    s.deckCount = 14;
     s.lanes.kiln.you = [CW.makeCard('frost', 6, 's-k1'), CW.makeCard('frost', 7, 's-k2')];
     s.lanes.kiln.ai = [CW.makeCard('frost', 8, 's-k3')];
     s.lanes.hollow.you = [];
@@ -86,8 +91,8 @@
     s.lanes.tide.ai = [];
     s.hands.you = [
       CW.makeCard('flame', 8, 's-y1'), CW.makeCard('bramble', 2, 's-y2'),
-      CW.makeCard('ember', 0, 's-y3'), CW.makeCard('gloam', 5, 's-y4'),
-      CW.makeCard('frost', 4, 's-y5')
+      CW.makeCard('ember', 0, 's-y3'), CW.makeCard('gloam', 4, 's-y4'),
+      CW.makeCard('frost', 5, 's-y5')
     ];
     s.hands.ai = [
       CW.makeCard('flame', 3, 's-a1'), CW.makeCard('frost', 6, 's-a2'),
@@ -96,7 +101,7 @@
     ];
     s.flare = null;
     s.bestCombo = 'Ladder +5';
-    s.log = 'Your move — place two cards, then the Wickkeeper answers.';
+    s.log = 'Both sides have placed — the lanes resolve.';
     return s;
   }
 

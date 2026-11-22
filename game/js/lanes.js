@@ -7,11 +7,13 @@
   function el(id) { return document.getElementById(id); }
 
   // Sum-then-result, combo named in the chip, never in the sum:
-  // "6 + 7 + 5 = 18" for a Ladder, "8" for a lone card, "—" for an empty row.
+  // "6 + 7 + 5 = 18" for a Ladder, nothing for a lone card (its big total
+  // already says the value — a small copy underneath is clutter), "—" for
+  // an empty row.
   function mathsText(cards) {
     if (!cards.length) return '—';
     var s = CW.scoreLane(cards);
-    if (cards.length === 1) return String(s.sum);
+    if (cards.length === 1) return '';
     var parts = cards.map(function (c) { return String(c.value); });
     if (s.combo) parts.push(String(s.bonus));
     return parts.join(' + ') + ' = ' + s.total;

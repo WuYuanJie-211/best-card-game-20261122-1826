@@ -65,14 +65,14 @@
 .big-btn:hover { filter: brightness(1.2); }
 .rules-line { margin-top: 22px; font-size: 18px; color: #cbb98e; }
 .title-foot { margin-top: 34px; font-size: 14px; color: #8fa08f; font-family: ui-monospace, monospace; }
-.title-bottom { position: absolute; top: 660px; left: 0; right: 0; text-align: center; font-size: 14px; color: #8fa08f; font-family: ui-monospace, monospace; margin: 0; }
+.title-bottom { position: absolute; top: 600px; left: 0; right: 0; text-align: center; font-size: 14px; color: #8fa08f; font-family: ui-monospace, monospace; margin: 0; }
 
 /* ---- Table HUD ---- */
 .hud {
   display: grid;
   grid-template-columns: 300px 1fr 300px;
   align-items: start;
-  padding: 8px 20px 0;
+  padding: 4px 20px 0;
   gap: 12px;
 }
 .wick-panel { background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(232, 178, 90, 0.35); border-radius: 10px; padding: 6px 12px; }
@@ -101,8 +101,7 @@
 }
 .foot-left, .foot-right { display: flex; align-items: center; gap: 8px; }
 .foot-left b { color: #ffcf7a; }
-.foot-mid { position: absolute; left: 50%; transform: translateX(-50%); letter-spacing: 0.1em; }
-.foot-mid span { color: #ffcf7a; }
+.foot-left span { color: #ffcf7a; }
 .table-footer button {
   font-family: Georgia, serif; font-size: 14px; margin-left: 6px; padding: 7px 12px;
   border-radius: 8px; border: 1px solid #6b543a; background: #24302a; color: #efe3c8; cursor: pointer;
@@ -112,7 +111,7 @@
 #ai-hand-count { font-family: ui-monospace, monospace; font-size: 12px; color: #a8b8a0; margin-top: 2px; }
 
 /* ---- Lanes ---- */
-.lanes { display: flex; gap: 18px; justify-content: center; padding: 6px 20px 0; }
+.lanes { display: flex; gap: 18px; justify-content: center; padding: 0 20px 0; }
 .lane {
   width: 380px;
   background: rgba(0, 0, 0, 0.28);
@@ -130,7 +129,7 @@
 .lane-name { font-size: 19px; letter-spacing: 0.06em; color: #f4e6bd; }
 .lane-kindled-badge { font-size: 12px; color: #ffb35a; letter-spacing: 0.1em; visibility: hidden; }
 .lane-row { display: flex; align-items: center; gap: 8px; min-height: 106px; }
-.lane-row-label { font-size: 11px; color: rgba(239, 227, 200, 0.7); width: 34px; letter-spacing: 0.05em; flex-shrink: 0; }
+.lane-row-label { font-size: 11px; color: rgba(239, 227, 200, 0.7); width: 34px; letter-spacing: 0.05em; flex-shrink: 0; margin-left: -6px; }
 .lane-ai-cards, .lane-you-cards { display: flex; gap: 6px; flex: 1; min-height: 106px; align-items: center; }
 .lane-ai-cards .card, .lane-you-cards .card { width: 76px; height: 106px; }
 .lane-ai-cards .card .card-value, .lane-you-cards .card .card-value { font-size: 26px; }
@@ -153,17 +152,18 @@
 /* ---- Hands ---- */
 #ai-hand { display: flex; gap: 6px; justify-content: flex-end; min-height: 56px; }
 #ai-hand .card { width: 40px; height: 56px; }
-#player-hand { display: flex; gap: 10px; justify-content: center; padding: 16px 20px 0; min-height: 160px; }
+#player-hand { display: flex; gap: 10px; justify-content: center; padding: 0 20px 0; min-height: 160px; }
 #player-hand .card { width: 112px; height: 156px; }
-#ember-rule { text-align: center; font-size: 12px; color: #a8b8a0; padding-top: 0; }
+#ember-rule { text-align: center; font-size: 13px; color: #a8b8a0; padding-top: 2px; }
 #player-hand .card { cursor: pointer; }
 #player-hand .card:hover { transform: translateY(-10px) rotate(1deg); }
 #player-hand .card.selected { transform: translateY(-14px); outline: 3px solid #ffb35a; }
-.table-foot { text-align: center; font-size: 13px; color: #8fa08f; padding-top: 2px; }
+.table-foot { text-align: center; font-size: 13px; line-height: 1.5; color: #8fa08f; padding-top: 2px; }
 #btn-resolve { margin-top: 6px; }
 
 /* ---- Win / loss ---- */
-#screen-win, #screen-loss { text-align: center; padding-top: 120px; }
+#screen-win { text-align: center; padding-top: 120px; }
+#screen-loss { text-align: center; padding-top: 80px; }
 #screen-win h1 { font-size: 64px; color: #ffd97a; text-shadow: 0 0 30px rgba(255, 200, 90, 0.8); margin: 0; letter-spacing: 0.1em; }
 #screen-loss h1 { font-size: 64px; color: #9aa4b0; margin: 0; letter-spacing: 0.12em; }
 .end-stats { font-family: ui-monospace, monospace; font-size: 18px; color: #efe3c8; margin: 18px 0 8px; line-height: 1.8; }
@@ -173,18 +173,18 @@
 .twin-pair .card { width: 110px; height: 154px; }
 .twin-pair .card:first-child { transform: rotate(-6deg); }
 .twin-pair .card:last-child { transform: rotate(6deg); }
-.twin-ribbon { display: inline-block; margin-top: 8px; background: #7a4a9e; color: #fff8e6; font-family: ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; padding: 3px 14px; border-radius: 4px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4); }
+.twin-ribbon { display: inline-block; margin-top: 8px; background: #c98a2e; color: #fff8e6; font-family: ui-monospace, monospace; font-size: 12px; letter-spacing: 0.1em; padding: 3px 14px; border-radius: 4px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4); }
 .loss-caption { font-size: 16px; font-style: italic; color: #d8c49a; margin: 10px 0 0; }
-/* Win-screen mini pair: 40px cards, ribbon beside them. */
-.twin-mini { display: flex; align-items: center; justify-content: center; gap: 10px; }
-.twin-mini .twin-pair { gap: 6px; }
-.twin-mini .twin-pair .card { width: 40px; height: 56px; }
-.twin-mini .twin-pair .card .card-value, .twin-mini .twin-pair .card .card-value-mirror { font-size: 15px; top: 3px; left: 5px; }
-.twin-mini .twin-pair .card .card-value-mirror { left: auto; right: 5px; bottom: 3px; }
-.twin-mini .twin-pair .card .card-suit-top, .twin-mini .twin-pair .card .card-suit-bottom,
-.twin-mini .twin-pair .card .card-name { display: none; }
-.twin-mini .twin-pair .card .card-suit-big svg { width: 20px; height: 20px; }
-.twin-mini .twin-ribbon { margin-top: 0; }
+/* Win-screen combo: labelled, full-size pair (80px cards) with the amber
+   ribbon under both cards, matching the loss screen's weight. */
+.win-combo { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.win-best-label { font-size: 14px; font-style: italic; color: #d8c49a; }
+.win-combo .twin-pair { gap: 20px; }
+.win-combo .twin-pair .card { width: 80px; height: 112px; }
+.win-combo .twin-pair .card .card-value, .win-combo .twin-pair .card .card-value-mirror { font-size: 22px; }
+.win-combo .twin-pair .card .card-suit-top, .win-combo .twin-pair .card .card-suit-bottom { display: none; }
+.win-combo .twin-pair .card .card-suit-big svg { width: 34px; height: 34px; }
+.win-combo .twin-ribbon { margin-top: 0; }
 #win-best { display: block; }
 #burst-layer { position: absolute; inset: 0; pointer-events: none; }
 
