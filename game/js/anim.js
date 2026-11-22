@@ -31,7 +31,8 @@
     }, 900);
   }
 
-  // Combo flare: ring both cards in a lane and float the bonus tag.
+  // Combo flare: ring both cards in a lane. The bonus is named in the lane's
+  // score-column chip, never floated over the cards.
   function comboFlare(lane, combo, who) {
     var box = document.getElementById('lane-' + lane);
     if (!box) return;
@@ -39,8 +40,6 @@
     if (!row) return;
     var cards = row.querySelectorAll('.card');
     cards.forEach(function (c) { c.classList.add('flare'); });
-    var name = CW.COMBOS[combo].name.toUpperCase();
-    floatTag(row, '+' + CW.COMBOS[combo].bonus + ' ' + name, 'combo-' + combo);
     setTimeout(function () {
       cards.forEach(function (c) { c.classList.remove('flare'); });
     }, 1600);
@@ -54,23 +53,30 @@
     setTimeout(function () { panel.classList.remove('shake'); }, 500);
   }
 
-  // Win flourish: 18 card backs burst radially from the stage centre.
+  // Win flourish: 18 card backs parked in the outer 140px band, around the
+  // edges, keeping an 80px clear radius around the headline block so no card
+  // ever crosses the title.
   function winBurst() {
     var layer = document.getElementById('burst-layer');
     if (!layer) return;
     layer.innerHTML = '';
-    for (var i = 0; i < 18; i++) {
+    // Top corners only (never above the centred headline), both side edges,
+    // and a full bottom row. All inside the outer 140px band.
+    var spots = [
+      { x: 66, y: 66 }, { x: 156, y: 66 }, { x: 1124, y: 66 }, { x: 1214, y: 66 },
+      { x: 66, y: 300 }, { x: 66, y: 420 }, { x: 66, y: 540 },
+      { x: 1214, y: 300 }, { x: 1214, y: 420 }, { x: 1214, y: 540 },
+      { x: 86, y: 654 }, { x: 266, y: 654 }, { x: 446, y: 654 }, { x: 626, y: 654 },
+      { x: 806, y: 654 }, { x: 986, y: 654 }, { x: 1106, y: 654 }, { x: 1194, y: 654 }
+    ];
+    spots.forEach(function (p, i) {
       var back = document.createElement('div');
-      back.className = 'burst-card';
-      var angle = (i / 18) * Math.PI * 2;
-      var dist = 260 + (i % 3) * 60;
-      var dx = Math.cos(angle) * dist;
-      var dy = Math.sin(angle) * dist;
-      back.style.setProperty('--dx', dx.toFixed(0) + 'px');
-      back.style.setProperty('--dy', dy.toFixed(0) + 'px');
-      back.style.animationDelay = (i * 25) + 'ms';
+      back.className = 'burst-card static';
+      back.style.left = p.x + 'px';
+      back.style.top = p.y + 'px';
+      back.style.animationDelay = (i * 60) + 'ms';
       layer.appendChild(back);
-    }
+    });
   }
 
   // Snap a placed card: brief impact nudge on its lane frame.

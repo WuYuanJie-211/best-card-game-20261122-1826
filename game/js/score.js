@@ -1,4 +1,4 @@
-// Legal moves, combo detection, lane scoring, damage and match end for Cinderwick.
+// Score: legal moves, combo detection, lane scoring, damage and match end.
 (function () {
   var root = (typeof window !== 'undefined') ? window : globalThis;
   var CW = root.CW = root.CW || {};

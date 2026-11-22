@@ -37,9 +37,9 @@
 }
 .wick-panel.thinking { animation: keeper-pulse 1.2s ease-in-out infinite; }
 
-@keyframes burst-out {
-  from { transform: translate(-50%, -50%) rotate(0deg) scale(0.4); opacity: 1; }
-  to { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(160deg) scale(1); opacity: 0.9; }
+@keyframes burst-bob {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-4deg); }
+  50% { transform: translate(-50%, -56%) rotate(4deg); }
 }
 .burst-card {
   position: absolute; left: 50%; top: 42%;
@@ -47,8 +47,10 @@
   background: repeating-linear-gradient(45deg, #2a2a55 0 8px, #23234a 8px 16px);
   border: 1px solid #4a4a7a; border-radius: 7px;
   box-shadow: inset 0 0 0 3px #e8b25a;
-  animation: burst-out 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
+/* Perimeter burst: card backs parked in the outer 140px band, clear of the
+   headline, with a gentle bob instead of a radial fly-through. */
+.burst-card.static { animation: burst-bob 2.4s ease-in-out infinite; opacity: 0.85; }
 
 @keyframes track-in {
   from { letter-spacing: 0.4em; opacity: 0; }

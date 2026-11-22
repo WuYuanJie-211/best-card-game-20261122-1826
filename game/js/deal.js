@@ -1,4 +1,4 @@
-// State machine, click wiring, round and match flow for Cinderwick.
+// Deal: dealing, round and match flow — the state machine, click wiring and turn order for Cinderwick.
 (function () {
   var root = (typeof window !== 'undefined') ? window : globalThis;
   var CW = root.CW = root.CW || {};
@@ -48,7 +48,7 @@
     s.temperLine = CW.temperLine(s.temper);
     s.leader = s.round === 1 ? 'you' : (s.lastRoundLoser || 'you');
     s.turn = s.leader;
-    s.log = 'Round ' + s.round + ' — ' + CW.LANE_NAMES[s.kindled] + ' is Kindled (double damage). ' + s.temperLine;
+    s.log = 'Round ' + s.round + ' — ' + CW.LANE_NAMES[s.kindled] + ' is Kindled (double damage).';
     CW.renderHand(s);
     CW.dealIn(document.getElementById('player-hand'));
     if (s.turn === 'ai') setTimeout(aiStep, 700);

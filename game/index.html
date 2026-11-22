@@ -18,15 +18,16 @@
       <div class="title-fan" aria-hidden="true">
         <div class="card suit-flame"><span class="card-value">7</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><polygon points="12,2 22,20 2,20" fill="#e2603a"/></svg></span><span class="card-name">Flame</span></div>
         <div class="card suit-frost"><span class="card-value">5</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><polygon points="12,1 23,12 12,23 1,12" fill="#4fa8d8"/></svg></span><span class="card-name">Frost</span></div>
-        <div class="card suit-bramble"><span class="card-value">3</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><g fill="#6fa844"><ellipse cx="12" cy="5" rx="4" ry="5"/><ellipse cx="12" cy="19" rx="4" ry="5"/><ellipse cx="5" cy="12" rx="5" ry="4"/><ellipse cx="19" cy="12" rx="5" ry="4"/></g></svg></span><span class="card-name">Bramble</span></div>
+        <div class="card suit-bramble"><span class="card-value">3</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><g fill="#6fa844"><circle cx="12" cy="7" r="4.5"/><circle cx="6.5" cy="14.5" r="4.5"/><circle cx="17.5" cy="14.5" r="4.5"/><polygon points="10.5,16 13.5,16 15.5,22 8.5,22"/></g></svg></span><span class="card-name">Bramble</span></div>
         <div class="card suit-gloam"><span class="card-value">8</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#8f6bd6"/></svg></span><span class="card-name">Gloam</span></div>
-        <div class="card suit-ember"><span class="card-value">✶</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><polygon points="12,1 14.6,8.2 22,8.6 16.4,13.4 18.4,20.8 12,16.8 5.6,20.8 7.6,13.4 2,8.6 9.4,8.2" fill="#e8d9a8"/></svg></span><span class="card-name">Ember Wild</span></div>
+        <div class="card suit-ember"><span class="card-value">0</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><polygon points="12,1 14.6,8.2 22,8.6 16.4,13.4 18.4,20.8 12,16.8 5.6,20.8 7.6,13.4 2,8.6 9.4,8.2" fill="#e8d9a8"/></svg></span><span class="card-name">Ember Wild</span></div>
       </div>
       <h1 class="wordmark">CINDERWICK</h1>
       <p class="subtitle">A duel of three lanes</p>
       <button class="big-btn" id="btn-deal">Deal a Duel</button>
       <p class="rules-line">Three lanes. Five cards. Two you can play.</p>
-      <p class="title-foot">BOND +4 &nbsp;·&nbsp; LADDER +5 &nbsp;·&nbsp; TWIN +6 &nbsp;·&nbsp; BURN FOR HEAT &nbsp;·&nbsp; SURGE FOR ONE MORE PLAY</p>
+      <p class="title-foot">BOND +4 &nbsp;·&nbsp; LADDER +5 &nbsp;·&nbsp; TWIN +6 &nbsp;·&nbsp; WILD 0 · COPIES SUIT &nbsp;·&nbsp; BURN FOR HEAT &nbsp;·&nbsp; SURGE FOR ONE MORE PLAY</p>
+      <p class="title-bottom">36 cards · 3 lanes · 8 rounds · one Kindled lane a round</p>
     </section>
 
     <section id="screen-table" class="screen">
@@ -34,7 +35,8 @@
         <div class="wick-panel" id="wick-you-panel">
           <h3>YOU · WICK <span class="wick-num" id="wick-you-num">15</span></h3>
           <div id="wick-you-pips"></div>
-          <div class="heat-line">HEAT <b id="heat-you-num">0</b> · hand below</div>
+          <div class="heat-line">HEAT <b id="heat-you-num">0</b> <span class="surge-chip" id="surge-chip-you" style="display:none">SURGE READY</span></div>
+          <div class="heat-pips" id="heat-pips-you"></div>
         </div>
         <div class="hud-mid">
           <div id="round-label">Round 1 / 8</div>
@@ -49,48 +51,53 @@
           <div id="ai-hand-count"></div>
         </div>
       </div>
-      <div class="hud-actions">
-        <button id="btn-burn" disabled>Burn: select a card first</button>
-        <button id="btn-surge" disabled>Surge +1 placement (4 Heat)</button>
-        <button id="btn-howto">How to Duel</button>
-      </div>
       <div class="lanes">
         <div class="lane" id="lane-kiln">
-          <div class="lane-head"><span class="lane-name">The Kiln</span><span class="lane-kindled-badge">✦ KINDLED · DOUBLE</span></div>
-          <div class="lane-row"><span class="lane-row-label">KEEPER</span><div class="lane-ai-cards"></div><span class="lane-total lane-total-ai">–</span></div>
-          <div class="lane-row"><span class="lane-row-label">YOU</span><div class="lane-you-cards"></div><span class="lane-total lane-total-you">–</span></div>
+          <div class="lane-head"><span class="lane-name">The Kiln</span><span class="lane-kindled-badge">◆ KINDLED · WINS 2 WICK</span></div>
+          <div class="lane-row"><span class="lane-row-label">KEEPER</span><div class="lane-ai-cards"></div><div class="lane-score"><span class="lane-total lane-total-ai">–</span><span class="lane-maths lane-maths-ai">—</span><span class="lane-chip lane-chip-ai"></span></div></div>
+          <div class="lane-row"><span class="lane-row-label">YOU</span><div class="lane-you-cards"></div><div class="lane-score"><span class="lane-total lane-total-you">–</span><span class="lane-maths lane-maths-you">—</span><span class="lane-chip lane-chip-you"></span></div></div>
           <span class="lane-combo"></span>
         </div>
         <div class="lane" id="lane-hollow">
-          <div class="lane-head"><span class="lane-name">The Hollow</span><span class="lane-kindled-badge">✦ KINDLED · DOUBLE</span></div>
-          <div class="lane-row"><span class="lane-row-label">KEEPER</span><div class="lane-ai-cards"></div><span class="lane-total lane-total-ai">–</span></div>
-          <div class="lane-row"><span class="lane-row-label">YOU</span><div class="lane-you-cards"></div><span class="lane-total lane-total-you">–</span></div>
+          <div class="lane-head"><span class="lane-name">The Hollow</span><span class="lane-kindled-badge">◆ KINDLED · WINS 2 WICK</span></div>
+          <div class="lane-row"><span class="lane-row-label">KEEPER</span><div class="lane-ai-cards"></div><div class="lane-score"><span class="lane-total lane-total-ai">–</span><span class="lane-maths lane-maths-ai">—</span><span class="lane-chip lane-chip-ai"></span></div></div>
+          <div class="lane-row"><span class="lane-row-label">YOU</span><div class="lane-you-cards"></div><div class="lane-score"><span class="lane-total lane-total-you">–</span><span class="lane-maths lane-maths-you">—</span><span class="lane-chip lane-chip-you"></span></div></div>
           <span class="lane-combo"></span>
         </div>
         <div class="lane" id="lane-tide">
-          <div class="lane-head"><span class="lane-name">The Tide</span><span class="lane-kindled-badge">✦ KINDLED · DOUBLE</span></div>
-          <div class="lane-row"><span class="lane-row-label">KEEPER</span><div class="lane-ai-cards"></div><span class="lane-total lane-total-ai">–</span></div>
-          <div class="lane-row"><span class="lane-row-label">YOU</span><div class="lane-you-cards"></div><span class="lane-total lane-total-you">–</span></div>
+          <div class="lane-head"><span class="lane-name">The Tide</span><span class="lane-kindled-badge">◆ KINDLED · WINS 2 WICK</span></div>
+          <div class="lane-row"><span class="lane-row-label">KEEPER</span><div class="lane-ai-cards"></div><div class="lane-score"><span class="lane-total lane-total-ai">–</span><span class="lane-maths lane-maths-ai">—</span><span class="lane-chip lane-chip-ai"></span></div></div>
+          <div class="lane-row"><span class="lane-row-label">YOU</span><div class="lane-you-cards"></div><div class="lane-score"><span class="lane-total lane-total-you">–</span><span class="lane-maths lane-maths-you">—</span><span class="lane-chip lane-chip-you"></span></div></div>
           <span class="lane-combo"></span>
         </div>
       </div>
       <div id="player-hand"></div>
+      <div id="ember-rule">Ember Wild copies the suit of the other card in its lane and adds 0.</div>
       <div class="table-foot">Click a card, then click a lane to play it. Each round you place two cards — the third lane is the one you concede.
         <button id="btn-resolve" style="display:none">Reveal</button>
+      </div>
+      <div class="table-footer">
+        <div class="foot-left">HEAT <b id="foot-heat-num">0</b><span id="foot-surge-wrap" style="display:none"> · <span class="surge-chip">SURGE READY</span></span></div>
+        <div class="foot-mid">DECK <span id="deck-count">36</span></div>
+        <div class="foot-right">
+          <button id="btn-burn" disabled>Burn: select a card first</button>
+          <button id="btn-surge" disabled>Surge +1 placement (4 Heat)</button>
+          <button id="btn-howto">How to Duel</button>
+        </div>
       </div>
     </section>
 
     <section id="screen-win" class="screen">
       <div id="burst-layer"></div>
       <h1>THE WICK IS YOURS</h1>
-      <p class="end-stats"><span id="win-wick">Wick 6 – 0</span><br><span id="win-rounds">Rounds played: 5</span><br><span id="win-best">Best combo: Twin +6</span></p>
+      <div class="end-stats"><span id="win-wick">Final Wick 6 – 0</span><br><span id="win-rounds">Rounds played: 5</span><br><span id="win-best">Best combo: Twin +6</span></div>
       <button class="big-btn" id="btn-deal-again">Duel Again</button>
     </section>
 
     <section id="screen-loss" class="screen">
       <h1>SNUFFED OUT</h1>
       <div id="loss-card"></div>
-      <p class="end-stats"><span id="loss-wick">Wick 0 – 7</span><br><span id="loss-rounds">Rounds played: 6</span><br>The Wickkeeper keeps the flame tonight.</p>
+      <div class="end-stats"><span id="loss-wick">Final Wick 0 – 7</span><br><span id="loss-rounds">Rounds played: 6</span><br>The Wickkeeper keeps the flame tonight.</div>
       <button class="big-btn" id="btn-try-again">Try Again</button>
     </section>
 
@@ -115,11 +122,12 @@
   </div>
 </div>
 <script src="js/cards.js"></script>
-<script src="js/rules.js"></script>
+<script src="js/score.js"></script>
 <script src="js/ai.js"></script>
+<script src="js/lanes.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/anim.js"></script>
 <script src="js/screens.js"></script>
-<script src="js/main.js"></script>
+<script src="js/deal.js"></script>
 </body>
 </html>

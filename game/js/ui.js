@@ -1,4 +1,4 @@
-// Pure state-to-DOM rendering of hands, lanes and the HUD for Cinderwick.
+// UI: pure state-to-DOM rendering of the HUD, hands, buttons and log.
 (function () {
   var root = (typeof window !== 'undefined') ? window : globalThis;
   var CW = root.CW = root.CW || {};
@@ -9,8 +9,8 @@
     opts = opts || {};
     var suit = CW.CARD_SUITS[card.suit];
     var cls = 'card suit-' + card.suit + (opts.selected ? ' selected' : '') + (opts.flare ? ' flare' : '');
-    var value = card.wild ? '✶' : String(card.value);
-    var svg = CW.suitSvg(card.suit, 22);
+    var value = card.wild ? '0' : String(card.value);
+    var svg = CW.suitSvg(card.suit, 18);
     var big = CW.suitSvg(card.suit, 46);
     return '<div class="' + cls + '" data-id="' + card.id + '" data-suit="' + card.suit + '"' +
       ' title="' + CW.cardLabel(card) + '">' +
@@ -41,8 +41,23 @@
     el('wick-ai-num').textContent = state.wick.ai;
     el('heat-you-num').textContent = state.heat.you;
     el('heat-ai-num').textContent = state.heat.ai;
+    // One flame pip per Heat, up to eight shown.
+    var pips = '';
+    for (var p = 0; p < 8; p++) pips += '<span class="heat-pip' + (p < state.heat.you ? ' on' : '') + '">▲</span>';
+    el('heat-pips-you').innerHTML = pips;
+    var surgeReady = CW.canSurge(state, 'you');
+    el('surge-chip-you').style.display = surgeReady ? '' : 'none';
+    el('foot-surge-wrap').style.display = surgeReady ? '' : 'none';
+    el('foot-heat-num').textContent = state.heat.you;
+    var deckCount = (state.deckCount != null) ? state.deckCount : state.deck.length;
+    el('deck-count').textContent = deckCount;
     el('round-label').textContent = 'Round ' + Math.min(state.round, CW.MAX_ROUNDS) + ' / ' + CW.MAX_ROUNDS;
-    el('temper-line').textContent = state.temperLine || '';
+    // Temper line, one sentence, lane name in amber.
+    var temper = state.temperLine || '';
+    var laneName = CW.LANE_NAMES[state.temper] || '';
+    el('temper-line').innerHTML = laneName && temper.indexOf(laneName) >= 0
+      ? temper.replace(laneName, '<span class="temper-lane-name">' + laneName + '</span>')
+      : temper;
     el('wick-ai-panel').classList.toggle('thinking', state.turn === 'ai' && state.phase === 'table');
   }
 
@@ -57,38 +72,6 @@
     for (var j = 0; j < state.hands.ai.length; j++) ai += backHtml();
     el('ai-hand').innerHTML = ai;
     el('ai-hand-count').textContent = state.hands.ai.length + ' cards';
-  }
-
-  function renderLanes(state) {
-    for (var i = 0; i < CW.LANES.length; i++) {
-      var lane = CW.LANES[i];
-      var box = el('lane-' + lane);
-      var youCards = state.lanes[lane].you;
-      var aiCards = state.lanes[lane].ai;
-      var y = CW.scoreLane(youCards);
-      var a = CW.scoreLane(aiCards);
-      box.classList.toggle('kindled', state.kindled === lane);
-      box.querySelector('.lane-ai-cards').innerHTML = aiCards.map(function (c) {
-        return cardHtml(c, { flare: state.flare && state.flare.lane === lane && state.flare.who === 'ai' });
-      }).join('');
-      box.querySelector('.lane-you-cards').innerHTML = youCards.map(function (c) {
-        return cardHtml(c, { flare: state.flare && state.flare.lane === lane && state.flare.who === 'you' });
-      }).join('');
-      box.querySelector('.lane-total-ai').textContent = aiCards.length ? String(a.total) : '–';
-      box.querySelector('.lane-total-you').textContent = youCards.length ? String(y.total) : '–';
-      var rib = box.querySelector('.lane-combo');
-      var combo = y.combo || a.combo;
-      var comboOwner = y.combo ? 'you' : (a.combo ? 'ai' : null);
-      if (combo) {
-        var name = CW.COMBOS[combo].name.toUpperCase();
-        rib.textContent = name + ' +' + CW.COMBOS[combo].bonus + (comboOwner === 'you' ? ' · YOU' : ' · KEEPER');
-        rib.className = 'lane-combo show ' + combo;
-      } else {
-        rib.textContent = '';
-        rib.className = 'lane-combo';
-      }
-      box.querySelector('.lane-kindled-badge').style.visibility = state.kindled === lane ? 'visible' : 'hidden';
-    }
   }
 
   function renderButtons(state) {
@@ -110,7 +93,7 @@
   function renderHand(state) {
     renderHud(state);
     renderHands(state);
-    renderLanes(state);
+    CW.renderLanes(state);
     renderButtons(state);
     renderLog(state);
   }
@@ -120,5 +103,4 @@
   CW.renderHand = renderHand;
   CW.renderHud = renderHud;
   CW.renderHands = renderHands;
-  CW.renderLanes = renderLanes;
 })();
