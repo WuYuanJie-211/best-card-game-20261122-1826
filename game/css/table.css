@@ -36,6 +36,7 @@
 /* ---- Title screen ---- */
 #screen-title { text-align: center; padding-top: 86px; }
 .title-fan { position: relative; height: 120px; margin-bottom: 8px; }
+.title-fan .card-name { display: none; }
 .title-fan .card { position: absolute; left: 50%; top: 0; margin-left: -48px; }
 .title-fan .card:nth-child(1) { transform: rotate(-14deg) translateX(-150px); }
 .title-fan .card:nth-child(2) { transform: rotate(-7deg) translateX(-76px); }
