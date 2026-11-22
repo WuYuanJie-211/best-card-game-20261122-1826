@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cinderwick — A Duel of Three Lanes</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/table.css">
+<link rel="stylesheet" href="css/cards.css">
+<link rel="stylesheet" href="css/motion.css">
+</head>
+<body style="margin:0;background:#0a0e0c;">
+<div id="app">
+  <div class="stage" id="stage">
+    <div id="float-layer"></div>
+
+    <section id="screen-title" class="screen active">
+      <div class="title-fan" aria-hidden="true">
+        <div class="card suit-flame"><span class="card-value">7</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><polygon points="12,2 22,20 2,20" fill="#e2603a"/></svg></span><span class="card-name">Flame</span></div>
+        <div class="card suit-frost"><span class="card-value">5</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><polygon points="12,1 23,12 12,23 1,12" fill="#4fa8d8"/></svg></span><span class="card-name">Frost</span></div>
+        <div class="card suit-bramble"><span class="card-value">3</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><g fill="#6fa844"><ellipse cx="12" cy="5" rx="4" ry="5"/><ellipse cx="12" cy="19" rx="4" ry="5"/><ellipse cx="5" cy="12" rx="5" ry="4"/><ellipse cx="19" cy="12" rx="5" ry="4"/></g></svg></span><span class="card-name">Bramble</span></div>
+        <div class="card suit-gloam"><span class="card-value">8</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#8f6bd6"/></svg></span><span class="card-name">Gloam</span></div>
+        <div class="card suit-ember"><span class="card-value">✶</span><span class="card-suit-big"><svg width="46" height="46" viewBox="0 0 24 24"><polygon points="12,1 14.6,8.2 22,8.6 16.4,13.4 18.4,20.8 12,16.8 5.6,20.8 7.6,13.4 2,8.6 9.4,8.2" fill="#e8d9a8"/></svg></span><span class="card-name">Ember Wild</span></div>
+      </div>
+      <h1 class="wordmark">CINDERWICK</h1>
+      <p class="subtitle">A duel of three lanes</p>
+      <button class="big-btn" id="btn-deal">Deal a Duel</button>
+      <p class="rules-line">Three lanes. Five cards. Two you can play.</p>
+      <p class="title-foot">BOND +4 &nbsp;·&nbsp; LADDER +5 &nbsp;·&nbsp; TWIN +6 &nbsp;·&nbsp; BURN FOR HEAT &nbsp;·&nbsp; SURGE FOR ONE MORE PLAY</p>
+    </section>
+
+    <section id="screen-table" class="screen">
+      <div class="hud">
+        <div class="wick-panel" id="wick-you-panel">
+          <h3>YOU · WICK <span class="wick-num" id="wick-you-num">15</span></h3>
+          <div id="wick-you-pips"></div>
+          <div class="heat-line">HEAT <b id="heat-you-num">0</b> · hand below</div>
+        </div>
+        <div class="hud-mid">
+          <div id="round-label">Round 1 / 8</div>
+          <div id="temper-line"></div>
+          <div id="log-line"></div>
+        </div>
+        <div class="wick-panel" id="wick-ai-panel">
+          <h3>THE WICKKEEPER · WICK <span class="wick-num" id="wick-ai-num">15</span></h3>
+          <div id="wick-ai-pips"></div>
+          <div class="heat-line">HEAT <b id="heat-ai-num">0</b></div>
+          <div id="ai-hand"></div>
+          <div id="ai-hand-count"></div>
+        </div>
+      </div>
+      <div class="hud-actions">
+        <button id="btn-burn" disabled>Burn: select a card first</button>
+        <button id="btn-surge" disabled>Surge +1 placement (4 Heat)</button>
+        <button id="btn-howto">How to Duel</button>
+      </div>
+      <div class="lanes">
+        <div class="lane" id="lane-kiln">
+          <div class="lane-head"><span class="lane-name">The Kiln</span><span class="lane-kindled-badge">✦ KINDLED · DOUBLE</span></div>
+          <div class="lane-row"><span class="lane-row-label">KEEPER</span><div class="lane-ai-cards"></div><span class="lane-total lane-total-ai">–</span></div>
+          <div class="lane-row"><span class="lane-row-label">YOU</span><div class="lane-you-cards"></div><span class="lane-total lane-total-you">–</span></div>
+          <span class="lane-combo"></span>
+        </div>
+        <div class="lane" id="lane-hollow">
+          <div class="lane-head"><span class="lane-name">The Hollow</span><span class="lane-kindled-badge">✦ KINDLED · DOUBLE</span></div>
+          <div class="lane-row"><span class="lane-row-label">KEEPER</span><div class="lane-ai-cards"></div><span class="lane-total lane-total-ai">–</span></div>
+          <div class="lane-row"><span class="lane-row-label">YOU</span><div class="lane-you-cards"></div><span class="lane-total lane-total-you">–</span></div>
+          <span class="lane-combo"></span>
+        </div>
+        <div class="lane" id="lane-tide">
+          <div class="lane-head"><span class="lane-name">The Tide</span><span class="lane-kindled-badge">✦ KINDLED · DOUBLE</span></div>
+          <div class="lane-row"><span class="lane-row-label">KEEPER</span><div class="lane-ai-cards"></div><span class="lane-total lane-total-ai">–</span></div>
+          <div class="lane-row"><span class="lane-row-label">YOU</span><div class="lane-you-cards"></div><span class="lane-total lane-total-you">–</span></div>
+          <span class="lane-combo"></span>
+        </div>
+      </div>
+      <div id="player-hand"></div>
+      <div class="table-foot">Click a card, then click a lane to play it. Each round you place two cards — the third lane is the one you concede.
+        <button id="btn-resolve" style="display:none">Reveal</button>
+      </div>
+    </section>
+
+    <section id="screen-win" class="screen">
+      <div id="burst-layer"></div>
+      <h1>THE WICK IS YOURS</h1>
+      <p class="end-stats"><span id="win-wick">Wick 6 – 0</span><br><span id="win-rounds">Rounds played: 5</span><br><span id="win-best">Best combo: Twin +6</span></p>
+      <button class="big-btn" id="btn-deal-again">Duel Again</button>
+    </section>
+
+    <section id="screen-loss" class="screen">
+      <h1>SNUFFED OUT</h1>
+      <div id="loss-card"></div>
+      <p class="end-stats"><span id="loss-wick">Wick 0 – 7</span><br><span id="loss-rounds">Rounds played: 6</span><br>The Wickkeeper keeps the flame tonight.</p>
+      <button class="big-btn" id="btn-try-again">Try Again</button>
+    </section>
+
+    <div id="howto" class="hidden">
+      <div class="howto-box">
+        <h2>How to Duel</h2>
+        <p>Both duelists refill to five cards and place two each into three lanes. You cannot cover all three — every placement is a bet on which lane you concede.</p>
+        <ul>
+          <li><b>Bond +4</b> — two cards of the same suit in one lane.</li>
+          <li><b>Ladder +5</b> — two consecutive values, either order.</li>
+          <li><b>Twin +6</b> — two equal values. Highest combo only, never stacked.</li>
+          <li><b>Ember Wild</b> — copies the other card's suit for a Bond, adds 0, never a Ladder or Twin.</li>
+          <li><b>Burn</b> — once a round, discard a card to bank Heat equal to its value.</li>
+          <li><b>Surge</b> — spend 4 Heat for one extra placement this round.</li>
+          <li><b>Kindled lane</b> — one lane each round glows and deals double damage.</li>
+        </ul>
+        <p>A lane won deals 1 Wick, +1 for your combo, +1 if Kindled. First to drop the other to 0 Wick takes the match. After round 8, higher Wick wins.</p>
+        <p><b>Read the Wickkeeper:</b> he announces his strongest lane every round — and always plays his highest card there first. Gift him that lane and win the other two.</p>
+        <button class="big-btn" id="howto-close">Back to the Table</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="js/cards.js"></script>
+<script src="js/rules.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/anim.js"></script>
+<script src="js/screens.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

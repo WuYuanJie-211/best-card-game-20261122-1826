@@ -1,0 +1,63 @@
+/* Every animation and its reduced-motion counterpart for Cinderwick. */
+@keyframes deal-in {
+  from { transform: translate(-320px, -260px) rotate(-18deg) scale(0.85); opacity: 0; }
+  60% { transform: translate(0, 4px) rotate(1deg) scale(1.06); opacity: 1; }
+  to { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
+}
+.card.deal-in { animation: deal-in 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+@keyframes float-up {
+  from { transform: translateX(-50%) translateY(0); opacity: 1; }
+  to { transform: translateX(-50%) translateY(-24px); opacity: 0; }
+}
+
+@keyframes snap-nudge {
+  0% { transform: translateY(0); }
+  40% { transform: translateY(2px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes wick-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+}
+.wick-panel.shake { animation: wick-shake 120ms ease-in-out 3; }
+
+@keyframes kindled-pulse {
+  0%, 100% { box-shadow: 0 0 18px rgba(255, 179, 90, 0.35), inset 0 0 18px rgba(255, 179, 90, 0.1); }
+  50% { box-shadow: 0 0 32px rgba(255, 179, 90, 0.6), inset 0 0 26px rgba(255, 179, 90, 0.18); }
+}
+.lane.kindled { animation: kindled-pulse 2.4s ease-in-out infinite; }
+
+@keyframes keeper-pulse {
+  0%, 100% { border-color: rgba(232, 178, 90, 0.35); }
+  50% { border-color: rgba(255, 179, 90, 0.95); }
+}
+.wick-panel.thinking { animation: keeper-pulse 1.2s ease-in-out infinite; }
+
+@keyframes burst-out {
+  from { transform: translate(-50%, -50%) rotate(0deg) scale(0.4); opacity: 1; }
+  to { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(160deg) scale(1); opacity: 0.9; }
+}
+.burst-card {
+  position: absolute; left: 50%; top: 42%;
+  width: 52px; height: 72px;
+  background: repeating-linear-gradient(45deg, #2a2a55 0 8px, #23234a 8px 16px);
+  border: 1px solid #4a4a7a; border-radius: 7px;
+  box-shadow: inset 0 0 0 3px #e8b25a;
+  animation: burst-out 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes track-in {
+  from { letter-spacing: 0.4em; opacity: 0; }
+  to { letter-spacing: 0.1em; opacity: 1; }
+}
+#screen-win.active h1 { animation: track-in 900ms ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .card.deal-in, .float-tag, .burst-card, #screen-win.active h1 { animation: none !important; }
+  .lane.kindled, .wick-panel.thinking, .wick-panel.shake { animation: none !important; }
+  .card, .lane { transition: none !important; }
+}
