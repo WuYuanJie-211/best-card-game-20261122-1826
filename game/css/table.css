@@ -159,6 +159,9 @@
 #player-hand .card:hover { transform: translateY(-10px) rotate(1deg); }
 #player-hand .card.selected { transform: translateY(-14px); outline: 3px solid #ffb35a; }
 .table-foot { text-align: center; font-size: 13px; line-height: 1.5; color: #8fa08f; padding-top: 2px; }
+/* Burn state, as guidance above the footer buttons; fixed height so the
+   footer never jumps when the line is empty. */
+.action-hint { text-align: center; font-size: 12px; line-height: 18px; min-height: 18px; color: #a8b8a0; }
 #btn-resolve { margin-top: 6px; }
 
 /* ---- Win / loss ---- */

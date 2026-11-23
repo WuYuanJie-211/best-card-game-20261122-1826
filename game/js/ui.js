@@ -77,7 +77,17 @@
     var burn = el('btn-burn');
     var surge = el('btn-surge');
     burn.disabled = !(state.phase === 'table' && state.turn === 'you' && CW.canBurn(state, 'you') && state.selected);
-    burn.textContent = state.selected ? 'Burn selected (bank Heat)' : 'Burn: select a card first';
+    // The button is just "Burn"; its state reads as guidance on the line above
+    // the buttons, never as an instruction trapped inside a greyed control.
+    burn.textContent = 'Burn';
+    var hint = el('action-hint');
+    if (state.phase === 'table' && state.turn === 'you') {
+      if (!CW.canBurn(state, 'you')) hint.textContent = 'Burn already used this round.';
+      else if (state.selected) hint.textContent = 'Burn discards the selected card and banks Heat equal to its value.';
+      else hint.textContent = 'Select a card first to Burn it.';
+    } else {
+      hint.textContent = '';
+    }
     surge.disabled = !(state.phase === 'table' && state.turn === 'you' && CW.canSurge(state, 'you'));
     surge.textContent = 'Surge +' + (state.surgeUsed.you ? 'used' : '1 placement') + ' (4 Heat)';
     el('btn-resolve').style.display =
