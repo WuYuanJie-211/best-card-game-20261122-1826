@@ -72,15 +72,15 @@
   display: grid;
   grid-template-columns: 300px 1fr 300px;
   align-items: start;
-  padding: 4px 20px 0;
+  padding: 0 20px 0;
   gap: 12px;
 }
-.wick-panel { background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(232, 178, 90, 0.35); border-radius: 10px; padding: 6px 12px; }
-.wick-panel h3 { margin: 0 0 4px; font-size: 15px; letter-spacing: 0.08em; color: #e8d9a8; }
+.wick-panel { background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(232, 178, 90, 0.35); border-radius: 10px; padding: 4px 12px; }
+.wick-panel h3 { margin: 0 0 2px; font-size: 15px; letter-spacing: 0.08em; color: #e8d9a8; }
 .wick-panel h3 .wick-num { font-family: ui-monospace, monospace; font-size: 20px; color: #ffb35a; }
 .pip { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 3px; background: #3a2c1c; border: 1px solid #6b543a; }
 .pip.wick.on { background: #ff9a3c; box-shadow: 0 0 6px rgba(255, 154, 60, 0.9); }
-.heat-line { font-family: ui-monospace, monospace; font-size: 14px; color: #d8c49a; margin-top: 4px; }
+.heat-line { font-family: ui-monospace, monospace; font-size: 14px; color: #d8c49a; margin-top: 2px; }
 .heat-line b { color: #ffcf7a; }
 .surge-chip { font-size: 11px; letter-spacing: 0.08em; color: #ffd97a; background: rgba(255, 179, 90, 0.16); border: 1px solid rgba(255, 179, 90, 0.6); border-radius: 4px; padding: 1px 6px; font-family: ui-monospace, monospace; white-space: nowrap; }
 .heat-pips { margin-top: 3px; min-height: 12px; }
@@ -108,7 +108,7 @@
 }
 .table-footer button:disabled { opacity: 0.45; cursor: default; }
 .table-footer button:hover:not(:disabled) { border-color: #e8b25a; }
-#ai-hand-count { font-family: ui-monospace, monospace; font-size: 12px; color: #a8b8a0; margin-top: 2px; }
+#ai-hand-count { font-family: ui-monospace, monospace; font-size: 12px; color: #a8b8a0; margin-top: 0; }
 
 /* ---- Lanes ---- */
 .lanes { display: flex; gap: 18px; justify-content: center; padding: 0 20px 0; }
@@ -117,7 +117,7 @@
   background: rgba(0, 0, 0, 0.28);
   border: 2px solid #3d4a3a;
   border-radius: 14px;
-  padding: 5px 10px 7px;
+  padding: 3px 10px 5px;
   cursor: pointer;
   transition: border-color 120ms ease;
   text-align: center;
@@ -131,7 +131,7 @@
 .lane-row { display: flex; align-items: center; gap: 8px; min-height: 106px; }
 .lane-row-label { font-size: 11px; color: rgba(239, 227, 200, 0.7); width: 34px; letter-spacing: 0.05em; flex-shrink: 0; margin-left: -6px; }
 .lane-ai-cards, .lane-you-cards { display: flex; gap: 6px; flex: 1; min-height: 106px; align-items: center; }
-.lane-ai-cards .card, .lane-you-cards .card { width: 76px; height: 106px; }
+.lane-ai-cards .card, .lane-you-cards .card { width: 76px; height: 106px; box-sizing: border-box; }
 .lane-ai-cards .card .card-value, .lane-you-cards .card .card-value { font-size: 26px; }
 .lane-ai-cards .card .card-value-mirror, .lane-you-cards .card .card-value-mirror { font-size: 26px; }
 .lane-ai-cards .card .card-suit-big, .lane-you-cards .card .card-suit-big { display: none; }
@@ -147,21 +147,41 @@
 .lane-chip.twin { background: #7a4a9e; }
 .lane-chip.lit { box-shadow: 0 0 12px rgba(255, 217, 122, 0.85); }
 /* Wick chip: what winning this lane is worth right now. */
-.lane-combo { display: inline-block; font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: 0.1em; padding: 2px 12px; border: 1px solid rgba(232, 178, 90, 0.55); border-radius: 20px; color: #ffd97a; background: rgba(0, 0, 0, 0.3); margin-top: 4px; min-height: 18px; }
+.lane-combo { display: inline-block; font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: 0.1em; padding: 1px 12px; border: 1px solid rgba(232, 178, 90, 0.55); border-radius: 20px; color: #ffd97a; background: rgba(0, 0, 0, 0.3); margin-top: 4px; min-height: 18px; }
 
 /* ---- Hands ---- */
 #ai-hand { display: flex; gap: 6px; justify-content: flex-end; min-height: 56px; }
 #ai-hand .card { width: 40px; height: 56px; }
-#player-hand { display: flex; gap: 10px; justify-content: center; padding: 0 20px 0; min-height: 160px; }
+#player-hand { display: flex; gap: 10px; justify-content: center; padding: 0 20px 0; min-height: 158px; }
 #player-hand .card { width: 112px; height: 156px; }
-#ember-rule { text-align: center; font-size: 13px; color: #a8b8a0; padding-top: 2px; }
+#ember-rule { text-align: center; font-size: 13px; color: #a8b8a0; padding-top: 0; }
 #player-hand .card { cursor: pointer; }
 #player-hand .card:hover { transform: translateY(-10px) rotate(1deg); }
 #player-hand .card.selected { transform: translateY(-14px); outline: 3px solid #ffb35a; }
-.table-foot { text-align: center; font-size: 13px; line-height: 1.5; color: #8fa08f; padding-top: 2px; }
-/* Burn state, as guidance above the footer buttons; fixed height so the
-   footer never jumps when the line is empty. */
-.action-hint { text-align: center; font-size: 12px; line-height: 18px; min-height: 18px; color: #a8b8a0; }
+.table-foot { text-align: center; font-size: 13px; line-height: 1.4; color: #8fa08f; padding-top: 0; }
+/* Burn state, as guidance above the footer buttons; anchored to the panel
+   (v4.1 fix: the hint was in normal flow and landed inside the absolute
+   footer band, so the footer's gold border cut through its glyphs). The hint
+   now owns its own band: bottom 70px = 56px footer + 14px gap. Colour stays
+   #a8b8a0, the instruction ink it already matches (#ember-rule is the same;
+   the plan's #b8b1a3 matches neither instruction line). #screen-table
+   (.screen, position absolute) is already the containing block, so no
+   .table-panel rule is needed. */
+.action-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 70px;          /* 56px footer band + 14px gap */
+  margin: 0;
+  min-height: 1.3em;     /* one line reserved for all three strings */
+  line-height: 1.3;
+  font-size: 12px;
+  text-align: center;
+  color: #a8b8a0;
+  opacity: 1;
+  white-space: nowrap;   /* longest string is ~340px; safe at 1280 */
+  pointer-events: none;
+}
 #btn-resolve { margin-top: 6px; }
 
 /* ---- Win / loss ---- */
